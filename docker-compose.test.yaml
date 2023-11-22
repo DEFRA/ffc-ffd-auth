@@ -2,11 +2,11 @@
 # that test output is saved to the host
 
 services:
-  ffc-template-node:
+  ffc-ffd-auth:
     build:
       target: development
-    image: ffc-template-node-development
-    container_name: ffc-template-node-test
+    image: ffc-ffd-auth-development
+    container_name: ffc-ffd-auth-test
     command: npm run test
     volumes:
       - ./app:/home/node/app

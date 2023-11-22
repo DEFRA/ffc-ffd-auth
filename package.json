@@ -1,8 +1,8 @@
 {
-  "name": "ffc-template-node",
+  "name": "ffc-ffd-auth",
   "version": "0.1.0",
-  "description": "description-of-project-goes-here",
-  "homepage": "https://github.com/DEFRA/ffc-template-node",
+  "description": "Farming Front Door authentication",
+  "homepage": "https://github.com/DEFRA/ffc-ffd-auth",
   "main": "app/index.js",
   "scripts": {
     "pretest": "npm run test:lint",

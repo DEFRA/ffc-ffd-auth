@@ -1,10 +1,10 @@
 services:
-  ffc-template-node:
+  ffc-ffd-auth:
     build:
       context: .
       target: production
-    image: ffc-template-node
-    container_name: ffc-template-node
+    image: ffc-ffd-auth
+    container_name: ffc-ffd-auth
     environment:
-      APPINSIGHTS_CLOUDROLE: ffc-template-node-local
+      APPINSIGHTS_CLOUDROLE: ffc-ffd-auth-local
       APPINSIGHTS_CONNECTIONSTRING: ${APPINSIGHTS_CONNECTIONSTRING}
