@@ -12,6 +12,17 @@ cd "${projectRoot}"
 
 docker-compose down
 
+mkdir -p .ssl
+
+if [ ! -f .ssl/rsa_key.pem ]; then
+  echo "Generating keys"
+  openssl genpkey -out .ssl/rsa_key.pem -algorithm RSA -pkeyopt rsa_keygen_bits:4096 < /dev/null
+  openssl rsa -in .ssl/rsa_key.pem -pubout -out .ssl/rsa_key.pub < /dev/null
+fi
+
+export DEV_AUTH_PRIVATE_KEY=$(cat .ssl/rsa_key.pem)
+export DEV_AUTH_PUBLIC_KEY=$(cat .ssl/rsa_key.pub)
+
 docker-compose \
   -f docker-compose.yaml \
   -f docker-compose.override.yaml \

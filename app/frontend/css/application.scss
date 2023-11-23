@@ -1,0 +1,12 @@
+$govuk-assets-path: "~govuk-frontend/govuk/assets/";
+@import "~govuk-frontend/govuk/all";
+
+.govuk-divider {
+  border-bottom: 5px solid #1d70b8;
+  margin-bottom: 10px;
+}
+
+.govuk-box {
+  background-color: govuk-colour("light-grey");
+  padding: 20px;
+}
