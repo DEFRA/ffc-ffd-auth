@@ -9,7 +9,7 @@ services:
     container_name: ffc-ffd-auth-development
     ports:
       - "3002:3002"
-      - "9002:9002"
+      - "9002:9229"
     volumes:
       - ./app:/home/node/app
       - ./package.json:/home/node/package.json

@@ -4,7 +4,9 @@ const routes = [].concat(
   require('../routes/assets'),
   require('../routes/sign-in'),
   require('../routes/sign-out'),
-  require('../routes/sign-in-oidc')
+  require('../routes/sign-in-oidc'),
+  require('../routes/strategy'),
+  require('../routes/validate')
 )
 
 module.exports = {

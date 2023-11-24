@@ -38,7 +38,7 @@ module.exports = [{
   },
   handler: async (request, h) => {
     if (authConfig.defraIdEnabled) {
-      return h.redirect('/sign-in')
+      return h.redirect('/auth/sign-in')
     }
     const token = await getAccessToken(request.payload.crn, request.payload.password)
     return h.redirect('/landing-page/home')
