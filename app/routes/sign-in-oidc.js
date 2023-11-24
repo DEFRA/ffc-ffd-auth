@@ -14,17 +14,19 @@ module.exports = {
     },
     validate: {
       payload: Joi.object({
-        code: Joi.string().required()
+        code: Joi.string().required(),
+        state: Joi.string().required()
       }).options({ stripUnknown: true }),
       failAction (request, h, err) {
         console.log(`Defra ID login failed: ${err}`)
-        return h.view('/').code(401).takeover()
+        return h.view('/sign-in').code(401).takeover()
       }
     }
   },
   handler: async (request, h) => {
     const response = await getAccessToken(request.payload.code)
-    return h.redirect('/home')
+    // TODO: Return back to the original page from state
+    return h.redirect('/landing-page/home')
       .state(AUTH_COOKIE_NAME, response.access_token, authConfig.cookieOptions)
       .state(AUTH_REFRESH_COOKIE_NAME, response.refresh_token, authConfig.cookieOptions)
   }

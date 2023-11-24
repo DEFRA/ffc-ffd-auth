@@ -4,6 +4,7 @@ const { getWellKnown } = require('./get-well-known')
 const getAuthorizationUrl = async () => {
   const { authorization_endpoint: url } = await getWellKnown()
 
+  // TODO: Add state and nonce
   const query = [
     `p=${authConfig.policy}`,
     `client_id=${authConfig.clientId}`,

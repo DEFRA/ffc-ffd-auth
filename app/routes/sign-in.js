@@ -9,7 +9,7 @@ module.exports = [{
   path: '/sign-in',
   handler: async (request, h) => {
     if (request.auth.isAuthenticated) {
-      return h.redirect('/home')
+      return h.redirect('/landing-page/home')
     }
 
     if (authConfig.defraIdEnabled) {
@@ -41,7 +41,7 @@ module.exports = [{
       return h.redirect('/sign-in')
     }
     const token = await getAccessToken(request.payload.crn, request.payload.password)
-    return h.redirect('/home')
+    return h.redirect('/landing-page/home')
       .state(AUTH_COOKIE_NAME, token, authConfig.cookieOptions)
   }
 }]
