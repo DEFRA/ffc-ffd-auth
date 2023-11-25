@@ -3,6 +3,7 @@ const { authConfig } = require('../config')
 const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
 const { POST } = require('../constants/http-verbs')
 const { getAccessToken } = require('../auth')
+const { decodeState } = require('../auth/defra-id/decode-state')
 
 module.exports = {
   method: POST,
@@ -25,8 +26,9 @@ module.exports = {
   },
   handler: async (request, h) => {
     const response = await getAccessToken(request.payload.code)
-    // TODO: Return back to the original page from state
-    return h.redirect('/landing-page/home')
+    const state = decodeState(request.payload.state)
+    const redirect = state.redirect ?? '/landing-page/home'
+    return h.redirect(redirect)
       .state(AUTH_COOKIE_NAME, response.access_token, authConfig.cookieOptions)
       .state(AUTH_REFRESH_COOKIE_NAME, response.refresh_token, authConfig.cookieOptions)
   }
