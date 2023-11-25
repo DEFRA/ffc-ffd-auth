@@ -8,15 +8,16 @@ module.exports = [{
   method: GET,
   path: '/sign-in',
   handler: async (request, h) => {
+    const redirect = request.query.redirect ?? '/landing-page/home'
     if (request.auth.isAuthenticated) {
-      return h.redirect('/landing-page/home')
+      return h.redirect(redirect)
     }
 
     if (authConfig.defraIdEnabled) {
-      return h.redirect(await getAuthorizationUrl())
+      return h.redirect(await getAuthorizationUrl(redirect))
     }
 
-    return h.view('sign-in')
+    return h.view('sign-in', { redirect })
   }
 },
 {
@@ -26,22 +27,25 @@ module.exports = [{
     validate: {
       payload: Joi.object({
         crn: Joi.number().integer().required(),
-        password: Joi.string().required()
+        password: Joi.string().required(),
+        redirect: Joi.string().optional().allow('')
       }),
       failAction: async (request, h, _error) => {
         return h.view('sign-in', {
           message: 'Your CRN and/or password is incorrect',
-          crn: request.payload.crn
+          crn: request.payload.crn,
+          redirect: request.payload.redirect
         }).takeover()
       }
     }
   },
   handler: async (request, h) => {
+    const redirect = request.payload.redirect ?? '/landing-page/home'
     if (authConfig.defraIdEnabled) {
-      return h.redirect('/auth/sign-in')
+      return h.redirect(`/auth/sign-in?redirect=${redirect}`)
     }
     const token = await getAccessToken(request.payload.crn, request.payload.password)
-    return h.redirect('/landing-page/home')
+    return h.redirect(redirect)
       .state(AUTH_COOKIE_NAME, token, authConfig.cookieOptions)
   }
 }]

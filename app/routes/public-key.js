@@ -1,14 +1,14 @@
 const { GET } = require('../constants/http-verbs')
-const { getStrategy } = require('../auth')
+const { getKeys } = require('../auth')
 
 module.exports = [{
   method: GET,
-  path: '/strategy',
+  path: '/public-key',
   options: {
     auth: false
   },
   handler: async (request, h) => {
-    const strategy = await getStrategy()
-    return h.response(strategy)
+    const { publicKey } = await getKeys()
+    return h.response({ key: publicKey })
   }
 }]

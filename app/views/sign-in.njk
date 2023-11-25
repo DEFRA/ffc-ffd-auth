@@ -22,6 +22,7 @@
     <div class="govuk-grid-column-two-thirds">
       <form method="POST" action="/auth/sign-in">
         <input type="hidden" name="crumb" value="{{crumb}}"/>
+        <input type="hidden" name="redirect" value="{{redirect}}"/>
         <h1 class="govuk-heading-l">Sign in</h1>
         {% if message %}
           <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">

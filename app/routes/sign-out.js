@@ -5,7 +5,7 @@ module.exports = [{
   method: GET,
   path: '/sign-out',
   handler: (_request, h) => {
-    return h.redirect('/')
+    return h.redirect('/landing-page')
       .unstate(AUTH_COOKIE_NAME)
       .unstate(AUTH_REFRESH_COOKIE_NAME)
   }

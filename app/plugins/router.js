@@ -5,7 +5,7 @@ const routes = [].concat(
   require('../routes/sign-in'),
   require('../routes/sign-out'),
   require('../routes/sign-in-oidc'),
-  require('../routes/strategy'),
+  require('../routes/public-key'),
   require('../routes/validate')
 )
 
