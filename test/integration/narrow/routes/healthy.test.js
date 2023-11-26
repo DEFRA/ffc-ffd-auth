@@ -1,21 +1,24 @@
+const { createServer } = require('../../../../app/server')
+
+let server
+
+beforeEach(async () => {
+  server = await createServer()
+  await server.start()
+})
+
+afterEach(async () => {
+  await server.stop()
+})
+
 describe('Healthy test', () => {
-  const server = require('../../../../app/server')
-
-  beforeEach(async () => {
-    await server.start()
-  })
-
   test('GET /healthy route returns 200', async () => {
     const options = {
       method: 'GET',
-      url: '/healthy'
+      url: '/auth/healthy'
     }
 
     const response = await server.inject(options)
     expect(response.statusCode).toBe(200)
-  })
-
-  afterEach(async () => {
-    await server.stop()
   })
 })
