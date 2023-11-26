@@ -18,7 +18,14 @@ containerSecret:
   name: ffc-ffd-auth-container-secret
   type: Opaque
 
-deployment: {}
+deployment:
+  priorityClassName: high
+
+ingress:
+  class: nginx
+  endpoint: ffc-ffd
+  server: example.com
+  path: /auth
 
 container:
   requestMemory: 100Mi
@@ -26,6 +33,17 @@ container:
   limitMemory: 100Mi
   limitCpu: 100m
   port: 3002
+
+auth:
+  defraIdEnabled: false
+  defraIdWellKnownUrl: 
+  defraIdClientId:
+  defraIdClientSecret:
+  defraIdServiceId:
+  defraIdPolicy:
+  defraIdRedirectPath: /auth/sign-in-oidc
+  devAuthPrivateKey:
+  devAuthPublicKey:
 
 livenessProbe:
   path: /healthz

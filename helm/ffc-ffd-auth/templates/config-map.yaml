@@ -4,4 +4,18 @@ data:
   NODE_ENV: {{ quote .Values.environment }}
   PORT: {{ quote .Values.container.port }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
+  PRIVATE_GATEWAY_HOST: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}
+  PUBLIC_GATEWAY_HOST: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}
+  DEFRA_ID_ENABLED: {{ quote .Values.container.defraIdEnabled }}
+  {{- if .Values.container.defraIdEnabled }}
+  DEFRA_ID_WELL_KNOWN_URL: {{ quote .Values.container.defraIdWellKnownUrl }}
+  DEFRA_ID_CLIENT_ID: {{ quote .Values.container.defraIdClientId }}  
+  DEFRA_ID_SERVICE_ID: {{ quote .Values.container.defraIdServiceId }}
+  DEFRA_ID_POLICY: {{ quote .Values.container.defraIdPolicy }}  
+  {{- if .Values.pr }}
+  DEFRA_ID_REDIRECT_URL: https://{{ .Values.ingress.endpoint }}-{{ .Values.pr }}.{{ .Values.ingress.server }}{{ .Values.container.defraIdRedirectPath }}
+  {{ else }}
+  DEFRA_ID_REDIRECT_URL: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}{{ .Values.container.defraIdRedirectPath }}
+  {{- end }}
+  {{- end }}
 {{- end -}}
