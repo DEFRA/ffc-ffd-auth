@@ -6,6 +6,7 @@ const { getKeys } = require('./get-keys')
 
 const createToken = async (crn) => {
   const { privateKey } = await getKeys()
+  console.log('Private key', privateKey)
   return jwt.sign({
     nonce: 'defaultNonce',
     contactId: crn,
