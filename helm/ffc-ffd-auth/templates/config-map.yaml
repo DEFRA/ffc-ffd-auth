@@ -4,8 +4,7 @@ data:
   NODE_ENV: {{ quote .Values.environment }}
   PORT: {{ quote .Values.container.port }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
-  PRIVATE_GATEWAY_HOST: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}
-  PUBLIC_GATEWAY_HOST: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}
+  GATEWAY_HOST: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}
   DEFRA_ID_ENABLED: {{ quote .Values.auth.defraIdEnabled }}
   {{- if .Values.auth.defraIdEnabled }}
   DEFRA_ID_WELL_KNOWN_URL: {{ quote .Values.auth.defraIdWellKnownUrl }}
