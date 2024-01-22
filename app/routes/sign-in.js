@@ -3,6 +3,7 @@ const { GET, POST } = require('../constants/http-verbs')
 const { AUTH_COOKIE_NAME } = require('../constants/cookies')
 const { authConfig } = require('../config')
 const { getAccessToken, getAuthorizationUrl } = require('../auth')
+const { getRedirectPath } = require('../redirect')
 
 module.exports = [{
   method: GET,
@@ -45,7 +46,7 @@ module.exports = [{
       return h.redirect(`/auth/sign-in?redirect=${redirect}`)
     }
     const token = await getAccessToken(request.payload.crn, request.payload.password)
-    return h.redirect(redirect)
+    return h.redirect(getRedirectPath(token, '', redirect))
       .state(AUTH_COOKIE_NAME, token, authConfig.cookieOptions)
   }
 }]
