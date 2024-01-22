@@ -2,9 +2,8 @@ const Joi = require('joi')
 const { authConfig } = require('../config')
 const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
 const { POST } = require('../constants/http-verbs')
-const { getAccessToken } = require('../auth')
+const { getAccessToken, getRedirectPath } = require('../auth')
 const { decodeState } = require('../auth/defra-id/decode-state')
-const { getRedirectPath } = require('../redirect')
 
 module.exports = {
   method: POST,

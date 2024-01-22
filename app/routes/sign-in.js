@@ -1,9 +1,8 @@
 const Joi = require('joi')
 const { GET, POST } = require('../constants/http-verbs')
-const { AUTH_COOKIE_NAME } = require('../constants/cookies')
+const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
 const { authConfig } = require('../config')
-const { getAccessToken, getAuthorizationUrl } = require('../auth')
-const { getRedirectPath } = require('../redirect')
+const { getAccessToken, getAuthorizationUrl, getRedirectPath } = require('../auth')
 
 module.exports = [{
   method: GET,
@@ -12,7 +11,7 @@ module.exports = [{
     const redirect = request.query.redirect ?? '/landing-page/home'
 
     if (request.auth.isAuthenticated) {
-      return h.redirect(redirect)
+      return h.redirect(getRedirectPath(request.state[AUTH_COOKIE_NAME], request.state[AUTH_REFRESH_COOKIE_NAME], redirect))
     }
 
     if (authConfig.defraIdEnabled) {
