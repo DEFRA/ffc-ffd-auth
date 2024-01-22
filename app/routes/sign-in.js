@@ -10,9 +10,6 @@ module.exports = [{
   path: '/sign-in',
   handler: async (request, h) => {
     const redirect = request.query.redirect ?? '/landing-page/home'
-    if (request.auth.isAuthenticated) {
-      return h.redirect(redirect)
-    }
 
     if (authConfig.defraIdEnabled) {
       return h.redirect(await getAuthorizationUrl(redirect))
