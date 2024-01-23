@@ -35,7 +35,7 @@ container:
   port: 3002
 
 auth:
-  defraIdEnabled: false
+  defraIdEnabled: true
   defraIdWellKnownUrl: 
   defraIdClientId:
   defraIdClientSecret:
