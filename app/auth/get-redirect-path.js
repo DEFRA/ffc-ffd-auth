@@ -3,6 +3,8 @@ const getRedirectPath = (accessToken, refreshToken, redirect) => {
     redirect = '/landing-page/home'
   }
 
+  // TODO: refactor as part of access code spike
+
   return redirect
 }
 
