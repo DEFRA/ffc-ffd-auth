@@ -14,12 +14,14 @@ const getAccessToken = async (code) => {
     `redirect_uri=${authConfig.redirectUrl}`
   ].join('&')
 
-  const { payload } = await Wreck.post(`${url}?${query}`, {
+  const { response, payload } = await Wreck.post(`${url}?${query}`, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     json: true
   })
+
+  console.log('getAccessToken response:', response)
 
   return payload
 }
