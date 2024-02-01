@@ -8,8 +8,6 @@ module.exports = {
     register: async (server, _options) => {
       const { publicKey } = await getKeys()
 
-      console.log(publicKey)
-
       server.auth.strategy('jwt', 'jwt', {
         key: publicKey,
         cookieKey: AUTH_COOKIE_NAME,
