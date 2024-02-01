@@ -3,9 +3,9 @@ const getRedirectPath = (accessToken, refreshToken, redirect) => {
     redirect = '/landing-page/home'
   }
 
-  const tokenParams = `token=${accessToken}&refreshToken=${refreshToken}`
+  // TODO: refactor as part of access code spike
 
-  return redirect.includes('?') ? `${redirect}&${tokenParams}` : `${redirect}?${tokenParams}`
+  return redirect
 }
 
 module.exports = {
