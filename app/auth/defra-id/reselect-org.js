@@ -2,7 +2,7 @@ const { authConfig } = require('../../config')
 const { createState } = require('./create-state')
 const { getWellKnown } = require('./get-well-known')
 
-const getAuthorizationUrl = async (redirect) => {
+const reselectOrganisation = async (redirect) => {
   const { authorization_endpoint: url } = await getWellKnown()
 
   const state = createState(redirect)
@@ -18,12 +18,12 @@ const getAuthorizationUrl = async (redirect) => {
     `scope=openid offline_access ${authConfig.clientId}`,
     'response_type=code',
     'forceReselection=true',
-    'prompt=login',
+    'prompt=none',
     'response_mode=form_post'
   ].join('&')
   return encodeURI(`${url}?${query}`)
 }
 
 module.exports = {
-  getAuthorizationUrl
+  reselectOrganisation
 }
