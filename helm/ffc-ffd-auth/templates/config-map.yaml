@@ -16,5 +16,10 @@ data:
   {{ else }}
   DEFRA_ID_REDIRECT_URL: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}{{ .Values.auth.defraIdRedirectPath }}
   {{- end }}
+  {{- if .Values.pr }}
+  DEFRA_ID_POST_LOGOUT_REDIRECT_URL: https://{{ .Values.ingress.endpoint }}-{{ .Values.pr }}.{{ .Values.ingress.server }}{{ .Values.auth.defraIdPostLogOutRedirectPath }}
+  {{ else }}
+  DEFRA_ID_POST_LOGOUT_REDIRECT_URL: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}{{ .Values.auth.defraIdPostLogOutRedirectPath }}
+  {{- end }}
   {{- end }}
 {{- end -}}

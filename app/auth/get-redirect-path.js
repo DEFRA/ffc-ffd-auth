@@ -1,9 +1,7 @@
-const getRedirectPath = (accessToken, refreshToken, redirect) => {
+const getRedirectPath = (redirect) => {
   if (!redirect) {
     redirect = '/landing-page/home'
   }
-
-  // TODO: refactor as part of access code spike
 
   return redirect
 }
