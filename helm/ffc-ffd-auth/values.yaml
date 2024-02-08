@@ -42,6 +42,7 @@ auth:
   defraIdServiceId:
   defraIdPolicy:
   defraIdRedirectPath: /auth/sign-in-oidc
+  defraIdPostLogoutRedirectPath: /auth/sign-out-oidc
   devAuthPrivateKey:
   devAuthPublicKey:
 
