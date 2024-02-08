@@ -7,7 +7,8 @@ const routes = [].concat(
   require('../routes/sign-in-oidc'),
   require('../routes/sign-out-oidc'),
   require('../routes/public-key'),
-  require('../routes/validate')
+  require('../routes/validate'),
+  require('../routes/picker')
 )
 
 module.exports = {
