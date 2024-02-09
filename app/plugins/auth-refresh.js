@@ -1,4 +1,4 @@
-const { refreshAccessToken } = require('../auth')
+const { refreshAccessToken } = require('ffc-auth')
 const { authConfig } = require('../config')
 const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
 
@@ -22,7 +22,7 @@ module.exports = {
           return h.continue
         }
 
-        const response = await refreshAccessToken(request.state[AUTH_REFRESH_COOKIE_NAME])
+        const response = await refreshAccessToken(request.state[AUTH_REFRESH_COOKIE_NAME], authConfig)
         h.state(AUTH_COOKIE_NAME, response.access_token, authConfig.cookieOptions)
         return h.continue
       })

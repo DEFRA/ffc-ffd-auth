@@ -18,6 +18,7 @@ const getAuthorizationUrl = async (redirect) => {
     `scope=openid offline_access ${authConfig.clientId}`,
     'response_type=code',
     'prompt=login',
+    'forceReselection=true',
     'response_mode=form_post'
   ].join('&')
   return encodeURI(`${url}?${query}`)
