@@ -1,4 +1,4 @@
-const { refreshAccessToken } = require('ffc-auth')
+const { refreshAccessToken } = require('../auth')
 const { authConfig } = require('../config')
 const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
 
