@@ -13,7 +13,7 @@ const schema = Joi.object().keys({
   devAuthPrivateKey: Joi.string().optional().allow(''),
   devAuthPublicKey: Joi.string().optional().allow(''),
   jwtConfig: Joi.object({
-    expiryInMinutes: Joi.number().default(60)
+    expiryInMinutes: Joi.number().default(5)
   }),
   cookieOptions: Joi.object({
     ttl: Joi.number().default(1000 * 60 * 60 * 24), // 24 hours
