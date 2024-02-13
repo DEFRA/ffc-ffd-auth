@@ -19,8 +19,8 @@ module.exports = [{
         return Boom.badRequest(error)
       }
     },
-    handler: (request, h) => {
-      const result = validateToken(request.payload.token)
+    handler: async (request, h) => {
+      const result = await validateToken(request.payload.token, request, h)
       return h.response(result)
     }
   }
