@@ -1,6 +1,6 @@
 const Hapi = require('@hapi/hapi')
 const Joi = require('joi')
-const { serverConfig } = require('./config')
+const { serverConfig, cacheConfig } = require('./config')
 
 const createServer = async () => {
   const server = Hapi.server({
@@ -14,8 +14,18 @@ const createServer = async () => {
     },
     router: {
       stripTrailingSlash: true
-    }
+    },
+    cache: [{
+      name: cacheConfig.cacheName,
+      provider: {
+        constructor: cacheConfig.catbox,
+        options: cacheConfig.catboxOptions
+      }
+    }]
   })
+
+  const cache = server.cache({ cache: cacheConfig.cacheName, segment: cacheConfig.segment, expiresIn: cacheConfig.ttl })
+  server.app.cache = cache
 
   server.validator(Joi)
   await server.register(require('@hapi/inert'))

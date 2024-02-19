@@ -19,3 +19,7 @@ services:
       DEFRA_ID_POST_LOGOUT_REDIRECT_URL: ${DEFRA_ID_POST_LOGOUT_REDIRECT_URL:-http://localhost:3000/auth/sign-out-oidc}
       DEV_AUTH_PRIVATE_KEY: ${DEV_AUTH_PRIVATE_KEY}
       DEV_AUTH_PUBLIC_KEY: ${DEV_AUTH_PUBLIC_KEY}
+      REDIS_HOST: ffc-ffd-auth-redis
+
+  ffc-ffd-auth-redis:
+    image: redis:6.2.7
