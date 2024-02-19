@@ -6,7 +6,8 @@ const schema = Joi.object().keys({
   env: Joi.string().valid(DEVELOPMENT, TEST, PRODUCTION).default(DEVELOPMENT),
   serviceName: Joi.string().default('Farming Front Door'),
   routePrefix: Joi.string().default('/auth'),
-  gatewayHost: Joi.string().required()
+  gatewayHost: Joi.string().required(),
+  cookiePassword: Joi.string().required()
 })
 
 const config = {
@@ -14,7 +15,8 @@ const config = {
   env: process.env.NODE_ENV,
   serviceName: process.env.SERVICE_NAME,
   routePrefix: process.env.ROUTE_PREFIX,
-  gatewayHost: process.env.GATEWAY_HOST
+  gatewayHost: process.env.GATEWAY_HOST,
+  cookiePassword: process.env.COOKIE_PASSWORD
 }
 
 const { error, value } = schema.validate(config)

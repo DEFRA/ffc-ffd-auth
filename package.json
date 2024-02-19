@@ -36,7 +36,8 @@
     "nunjucks": "3.2.4",
     "string-replace-loader": "3.1.0",
     "uuid": "9.0.1",
-    "@hapi/catbox-redis": "6.0.2"
+    "@hapi/catbox-redis": "6.0.2",
+    "@hapi/yar": "11.0.1"
   },
   "devDependencies": {
     "@hapi/catbox-memory": "5.0.1",
