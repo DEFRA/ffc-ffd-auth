@@ -5,7 +5,7 @@ const { refreshAccessToken } = require('../auth')
 
 module.exports = [{
   method: GET,
-  path: 'refresh',
+  path: '/refresh',
   options: {
     auth: false,
     plugins: {
