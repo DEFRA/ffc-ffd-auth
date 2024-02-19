@@ -24,9 +24,6 @@ const createServer = async () => {
     }]
   })
 
-  const cache = server.cache({ cache: cacheConfig.cacheName, segment: cacheConfig.segment, expiresIn: cacheConfig.ttl })
-  server.app.cache = cache
-
   server.validator(Joi)
   await server.register(require('@hapi/inert'))
   await server.register(require('./plugins/views'))

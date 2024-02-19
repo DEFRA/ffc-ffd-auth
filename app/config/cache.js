@@ -8,7 +8,7 @@ const schema = Joi.object({
   partition: Joi.string().default('ffc-ffd-auth'),
   cacheName: Joi.string().default('ffc-ffd-auth'),
   segment: Joi.string().default('ffc-ffd-auth'),
-  ttl: Joi.number().integer().default(1000 * 60 * 60)
+  ttl: Joi.number().integer().default(1000 * 60 * 60 * 24)
 })
 
 const config = {

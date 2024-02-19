@@ -1,15 +1,21 @@
-const { serverConfig } = require('../config')
+const { serverConfig, cacheConfig, authConfig } = require('../config')
 const { SESSION_COOKIE_NAME } = require('../constants/cookies')
 
 module.exports = {
   plugin: require('@hapi/yar'),
   options: {
     name: SESSION_COOKIE_NAME,
-    storeBlank: true,
-    maxCookieSize: 0,
+    storeBlank: false,
+    maxCookieSize: cacheConfig.useRedis ? 0 : 1024,
+    cache: {
+      cache: cacheConfig.cacheName,
+      expiresIn: cacheConfig.ttl,
+      segment: cacheConfig.segment
+    },
     cookieOptions: {
-      password: serverConfig.cookiePassword,
-      isSecure: !serverConfig.isDev
+      ...authConfig.cookieOptions,
+      encoding: undefined,
+      password: serverConfig.cookiePassword
     }
   }
 }

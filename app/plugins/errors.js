@@ -23,7 +23,8 @@ module.exports = {
           request.log('error', {
             statusCode,
             data: response.data,
-            message: response.message
+            message: response.message,
+            stack: response.stack
           })
 
           return h.view('500').code(statusCode)

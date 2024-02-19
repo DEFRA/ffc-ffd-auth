@@ -1,9 +1,9 @@
 const { v4: uuidv4 } = require('uuid')
 const { INITIALISATION_VECTOR } = require('../../constants/cache-keys')
 
-const createInitialisationVector = (cache) => {
+const createInitialisationVector = (request) => {
   const initialisationVector = uuidv4()
-  cache.set(INITIALISATION_VECTOR, initialisationVector)
+  request.yar.set(INITIALISATION_VECTOR, initialisationVector)
   return initialisationVector
 }
 
