@@ -11,10 +11,10 @@ module.exports = [{
     plugins: {
       crumb: false
     },
-    refresh: {
+    validate: {
       payload: Joi.object({
         token: Joi.object().required,
-        refreshToken: Joi.object().required
+        refreshToken: Joi.object()
       }),
       failAction: (_request, _h, error) => {
         return Boom.badRequest(error)
