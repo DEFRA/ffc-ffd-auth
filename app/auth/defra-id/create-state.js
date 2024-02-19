@@ -1,11 +1,15 @@
 const { v4: uuidv4 } = require('uuid')
+const { STATE } = require('../../constants/cache-keys')
 
-const createState = (redirect) => {
-  const state = {
+const createState = (cache, redirect) => {
+  const state = Buffer.from(JSON.stringify({
     id: uuidv4(),
     redirect
-  }
-  return Buffer.from(JSON.stringify(state)).toString('base64')
+  })).toString('base64')
+
+  cache.set(STATE, state)
+
+  return state
 }
 
 module.exports = {

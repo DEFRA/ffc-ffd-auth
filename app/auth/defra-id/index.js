@@ -1,15 +1,23 @@
-const { getAuthorizationUrl } = require('./get-authorization-url')
-const { getSignOutUrl } = require('./get-sign-out-url')
+const { clearCache } = require('./clear-cache')
+const { decodeState } = require('./decode-state')
 const { getAccessToken } = require('./get-access-token')
-const { refreshAccessToken } = require('./refresh-access-token')
-const { validateToken } = require('./validate-token')
+const { getAuthorizationUrl } = require('./get-authorization-url')
 const { getKeys } = require('./get-keys')
+const { getSignOutUrl } = require('./get-sign-out-url')
+const { refreshAccessToken } = require('./refresh-access-token')
+const { validateInitialisationVector } = require('./validate-initialisation-vector')
+const { validateState } = require('./validate-state')
+const { validateToken } = require('./validate-token')
 
 module.exports = {
-  getAuthorizationUrl,
-  getSignOutUrl,
+  clearCache,
+  decodeState,
   getAccessToken,
+  getAuthorizationUrl,
+  getKeys,
+  getSignOutUrl,
   refreshAccessToken,
-  validateToken,
-  getKeys
+  validateInitialisationVector,
+  validateState,
+  validateToken
 }

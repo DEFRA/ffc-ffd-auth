@@ -3,13 +3,12 @@ const { createState } = require('./create-state')
 const { createInitialisationVector } = require('./create-initialisation-vector')
 const { getWellKnown } = require('./get-well-known')
 
-const getAuthorizationUrl = async (redirect) => {
+const getAuthorizationUrl = async (cache, redirect) => {
   const { authorization_endpoint: url } = await getWellKnown()
 
-  const state = createState(redirect)
-  const initialisationVector = createInitialisationVector()
+  const state = createState(cache, redirect)
+  const initialisationVector = createInitialisationVector(cache)
 
-  // TODO: setup nonce
   const query = [
     `p=${authConfig.policy}`,
     `client_id=${authConfig.clientId}`,
