@@ -1,9 +1,9 @@
 const Joi = require('joi')
 const { authConfig } = require('../config')
-const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
+const { AUTH_COOKIE_NAME } = require('../constants/cookies')
 const { GET } = require('../constants/http-verbs')
-const { getAccessToken, getRedirectPath } = require('../auth')
-const { validateState, decodeState, validateInitialisationVector, clearCache } = require('../auth')
+const { validateState, decodeState, validateInitialisationVector, clearCache, getAccessToken, getRedirectPath } = require('../auth')
+const { cacheRefreshToken } = require('../auth/cache-refresh-token')
 
 module.exports = {
   method: GET,
@@ -31,8 +31,8 @@ module.exports = {
     validateInitialisationVector(request, response.access_token)
     const redirect = getRedirectPath(state.redirect)
     clearCache(request)
+    cacheRefreshToken(request, response.redirect_token)
     return h.redirect(redirect)
       .state(AUTH_COOKIE_NAME, response.access_token, authConfig.cookieOptions)
-      .state(AUTH_REFRESH_COOKIE_NAME, response.refresh_token, authConfig.cookieOptions)
   }
 }
