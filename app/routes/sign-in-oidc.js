@@ -27,12 +27,12 @@ module.exports = {
   handler: async (request, h) => {
     validateState(request, request.query.state)
     const state = decodeState(request.query.state)
-    const response = await getAccessToken(request.query.code)
-    validateInitialisationVector(request, response.access_token)
+    const { access_token: accessToken, redirect_token: refreshToken } = await getAccessToken(request.query.code)
+    validateInitialisationVector(request, accessToken)
     const redirect = getRedirectPath(state.redirect)
     clearCache(request)
-    cacheRefreshToken(request, response.redirect_token)
+    cacheRefreshToken(request, refreshToken)
     return h.redirect(redirect)
-      .state(AUTH_COOKIE_NAME, response.access_token, authConfig.cookieOptions)
+      .state(AUTH_COOKIE_NAME, accessToken, authConfig.cookieOptions)
   }
 }
