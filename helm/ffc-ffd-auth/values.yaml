@@ -45,6 +45,12 @@ auth:
   defraIdPostLogoutRedirectPath: /auth/sign-out-oidc
   devAuthPrivateKey:
   devAuthPublicKey:
+  cookiePassword: the-password-must-be-at-least-32-characters-long
+
+redis:
+  host:
+  port: 6380
+  password:
 
 livenessProbe:
   path: /auth/healthz
