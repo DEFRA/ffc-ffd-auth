@@ -6,7 +6,7 @@ module.exports = {
   options: {
     name: SESSION_COOKIE_NAME,
     storeBlank: false,
-    maxCookieSize: cacheConfig.useRedis ? 0 : 1024,
+    maxCookieSize: 0,
     cache: {
       cache: cacheConfig.cacheName,
       expiresIn: cacheConfig.ttl,
