@@ -14,7 +14,7 @@ module.exports = {
     },
     cookieOptions: {
       ...authConfig.cookieOptions,
-      encoding: undefined,
+      encoding: null,
       password: serverConfig.cookiePassword
     }
   }
