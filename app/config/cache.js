@@ -1,13 +1,14 @@
 const Joi = require('joi')
 const { DEVELOPMENT, TEST, PRODUCTION } = require('../constants/environments')
+const { SERVICE_NAME } = require('../constants/service-name')
 
 const schema = Joi.object({
   host: Joi.string(),
   port: Joi.number().integer().default(6379),
   password: Joi.string().allow(''),
-  partition: Joi.string().default('ffc-ffd-auth'),
-  cacheName: Joi.string().default('ffc-ffd-auth'),
-  segment: Joi.string().default('ffc-ffd-auth'),
+  partition: Joi.string().default(SERVICE_NAME),
+  cacheName: Joi.string().default(SERVICE_NAME),
+  segment: Joi.string().default(SERVICE_NAME),
   ttl: Joi.number().integer().default(1000 * 60 * 60 * 24) // 24 hours
 })
 
