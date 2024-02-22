@@ -9,7 +9,6 @@ module.exports = {
   method: GET,
   path: '/sign-in-oidc',
   options: {
-    auth: false,
     plugins: {
       crumb: false
     },
@@ -25,6 +24,10 @@ module.exports = {
     }
   },
   handler: async (request, h) => {
+    if (request.auth.isAuthenticated) {
+      return h.redirect(getRedirectPath())
+    }
+
     validateState(request, request.query.state)
     const state = decodeState(request.query.state)
     const { access_token: accessToken, redirect_token: refreshToken } = await getAccessToken(request.query.code)
