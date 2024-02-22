@@ -1,10 +1,14 @@
+jest.mock('../../../../app/auth', () => ({
+  getKeys: jest.fn().mockResolvedValue({ publicKey: 'publicKey' }),
+  validateToken: jest.fn().mockResolvedValue({ isValid: true })
+}))
 const { createServer } = require('../../../../app/server')
 
 let server
 
 beforeEach(async () => {
   server = await createServer()
-  await server.start()
+  await server.initialize()
 })
 
 afterEach(async () => {

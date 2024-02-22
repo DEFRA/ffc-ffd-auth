@@ -22,4 +22,7 @@ data:
   DEFRA_ID_POST_LOGOUT_REDIRECT_URL: https://{{ .Values.ingress.endpoint }}.{{ .Values.ingress.server }}{{ .Values.auth.defraIdPostLogOutRedirectPath }}
   {{- end }}
   {{- end }}
+  COOKIE_PASSWORD: {{ quote .Values.auth.cookiePassword }}
+  REDIS_HOST: {{ quote .Values.redis.host }}
+  REDIS_PORT: {{ quote .Values.redis.port }}
 {{- end -}}

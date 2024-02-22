@@ -13,3 +13,13 @@ services:
     volumes:
       - ./app:/home/node/app
       - ./package.json:/home/node/package.json
+
+  ffc-ffd-auth-redis:
+    ports:
+      - "6302:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --dir /data --save 5 1
+
+volumes:
+  redis_data:

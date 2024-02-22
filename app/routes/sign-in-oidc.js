@@ -1,20 +1,19 @@
 const Joi = require('joi')
 const { authConfig } = require('../config')
-const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
-const { POST } = require('../constants/http-verbs')
-const { getAccessToken, getRedirectPath } = require('../auth')
-const { decodeState } = require('../auth/defra-id/decode-state')
+const { AUTH_COOKIE_NAME } = require('../constants/cookies')
+const { GET } = require('../constants/http-verbs')
+const { validateState, decodeState, validateInitialisationVector, clearCache, getAccessToken, getRedirectPath } = require('../auth')
+const { cacheRefreshToken } = require('../auth/cache-refresh-token')
 
 module.exports = {
-  method: POST,
+  method: GET,
   path: '/sign-in-oidc',
   options: {
-    auth: false,
     plugins: {
       crumb: false
     },
     validate: {
-      payload: Joi.object({
+      query: Joi.object({
         code: Joi.string().required(),
         state: Joi.string().required()
       }).options({ stripUnknown: true }),
@@ -25,11 +24,18 @@ module.exports = {
     }
   },
   handler: async (request, h) => {
-    const response = await getAccessToken(request.payload.code)
-    const state = decodeState(request.payload.state)
+    if (request.auth.isAuthenticated) {
+      return h.redirect(getRedirectPath())
+    }
+
+    validateState(request, request.query.state)
+    const state = decodeState(request.query.state)
+    const { access_token: accessToken, redirect_token: refreshToken } = await getAccessToken(request.query.code)
+    validateInitialisationVector(request, accessToken)
     const redirect = getRedirectPath(state.redirect)
+    clearCache(request)
+    cacheRefreshToken(request, refreshToken)
     return h.redirect(redirect)
-      .state(AUTH_COOKIE_NAME, response.access_token, authConfig.cookieOptions)
-      .state(AUTH_REFRESH_COOKIE_NAME, response.refresh_token, authConfig.cookieOptions)
+      .state(AUTH_COOKIE_NAME, accessToken, authConfig.cookieOptions)
   }
 }

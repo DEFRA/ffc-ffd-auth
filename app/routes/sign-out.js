@@ -1,7 +1,8 @@
 const { GET } = require('../constants/http-verbs')
-const { AUTH_COOKIE_NAME, AUTH_REFRESH_COOKIE_NAME } = require('../constants/cookies')
+const { AUTH_COOKIE_NAME } = require('../constants/cookies')
 const { authConfig } = require('../config')
 const { getSignOutUrl } = require('../auth')
+const { clearCache } = require('../auth')
 
 module.exports = [{
   method: GET,
@@ -10,9 +11,9 @@ module.exports = [{
     const redirect = request.query.redirect ?? '/landing-page'
 
     if (authConfig.defraIdEnabled) {
-      return h.redirect(await getSignOutUrl(redirect, request.state[AUTH_COOKIE_NAME]))
+      clearCache(request)
+      return h.redirect(await getSignOutUrl(request, redirect, request.state[AUTH_COOKIE_NAME]))
         .unstate(AUTH_COOKIE_NAME, authConfig.cookieOptions)
-        .unstate(AUTH_REFRESH_COOKIE_NAME, authConfig.cookieOptions)
     }
 
     return h.redirect(`/auth/sign-out-oidc?redirect=${redirect}`)

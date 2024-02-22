@@ -2,10 +2,10 @@ const { authConfig } = require('../../config')
 const { createState } = require('./create-state')
 const { getWellKnown } = require('./get-well-known')
 
-const getSignOutUrl = async (redirect, token) => {
+const getSignOutUrl = async (request, redirect, token) => {
   const { end_session_endpoint: url } = await getWellKnown()
 
-  const state = createState(redirect)
+  const state = createState(request, redirect)
 
   const query = [
     `post_logout_redirect_uri=${authConfig.postLogoutRedirectUrl}`,

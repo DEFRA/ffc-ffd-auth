@@ -1,6 +1,6 @@
 const Hapi = require('@hapi/hapi')
 const Joi = require('joi')
-const { serverConfig } = require('./config')
+const { serverConfig, cacheConfig } = require('./config')
 
 const createServer = async () => {
   const server = Hapi.server({
@@ -14,7 +14,14 @@ const createServer = async () => {
     },
     router: {
       stripTrailingSlash: true
-    }
+    },
+    cache: [{
+      name: cacheConfig.cacheName,
+      provider: {
+        constructor: cacheConfig.catbox,
+        options: cacheConfig.catboxOptions
+      }
+    }]
   })
 
   server.validator(Joi)
@@ -28,6 +35,7 @@ const createServer = async () => {
   await server.register(require('./plugins/crumb'))
   await server.register(require('./plugins/view-context'))
   await server.register(require('./plugins/logging'))
+  await server.register(require('./plugins/session'))
   if (serverConfig.isDev) {
     await server.register(require('blipp'))
   }
