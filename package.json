@@ -23,7 +23,7 @@
     "@hapi/boom": "10.0.1",
     "@hapi/crumb": "9.0.1",
     "@hapi/hapi": "20.2.2",
-    "@hapi/inert": "6.0.3",
+    "@hapi/inert": "6.0.5",
     "@hapi/vision": "7.0.2",
     "@hapi/wreck": "18.0.1",
     "applicationinsights": "2.3.5",
