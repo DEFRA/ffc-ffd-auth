@@ -25,7 +25,7 @@
     "@hapi/hapi": "20.2.2",
     "@hapi/inert": "6.0.3",
     "@hapi/vision": "7.0.2",
-    "@hapi/wreck": "18.0.1",
+    "@hapi/wreck": "18.1.0",
     "applicationinsights": "2.3.5",
     "govuk-frontend": "4.7.0",
     "hapi-auth-jwt2": "10.4.0",
